@@ -316,7 +316,18 @@ function printLabels(){
 }
 
 /* EVENTI */
-ssccInput.oninput = () => generateQR(ssccInput.value.trim());
+ssccInput.oninput = () => {
+  // Se l'input è vuoto, azzera tutto come il tasto ✖
+  if(ssccInput.value.trim() === '') {
+    qrBox.innerHTML = 'QR';
+    last4.textContent = '----';
+    counter.textContent = '';
+    return;
+  }
+  // Altrimenti genera il QR normalmente
+  generateQR(ssccInput.value.trim());
+};
+
 document.getElementById('print').onclick = printLabels;
 document.getElementById('download').onclick = () => {
   if(!qrObj) return;
